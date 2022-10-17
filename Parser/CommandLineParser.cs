@@ -40,6 +40,7 @@ namespace Parser.CommandLineParser
                     case "-l":
                         if (secondArg != null)
                         {
+                            this.bangunDatar.checkArgument(secondArg);
                             this.bangunDatar.luas();
                             return;
                         }
@@ -50,6 +51,7 @@ namespace Parser.CommandLineParser
                     case "-k":
                         if (secondArg != null)
                         {
+                            this.bangunDatar.checkArgument(secondArg);
                             this.bangunDatar.keliling();
                             return;
                         }

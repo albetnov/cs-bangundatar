@@ -18,7 +18,7 @@ class BangunDatar
     }
     public void question()
     {
-        string type = this.cli.ask("Ingin menghitung bangun datar apa? (Luas/Keliling): ");
+        string type = this.cli.ask("Ingin menghitung bangun datar apa? (Luas/Keliling): ", BangunDatar.LUAS);
 
         string lowered = type.ToLower();
 
@@ -26,19 +26,30 @@ class BangunDatar
         {
             Console.WriteLine("Ups. Ga boleh gitu bang.");
             this.question();
+            return;
         }
 
         if (lowered == LUAS)
         {
             this.luas();
+            return;
         }
 
         this.keliling();
+        return;
     }
 
-    public void checkArgument(string arg)
+    public string checkArgument(string arg)
     {
         string lowered = arg.ToLower();
+        if (lowered == "jajargenjang")
+        {
+            lowered = JAJAR_GENJANG;
+        }
+        if (lowered == "persegipanjang")
+        {
+            lowered = PERSEGI_PANJANG;
+        }
         string[] availableType = { PERSEGI, PERSEGI_PANJANG, SEGITIGA, TRAPESIUM, JAJAR_GENJANG };
         List<string> type = new List<string>(availableType);
 
@@ -47,9 +58,10 @@ class BangunDatar
             Console.WriteLine("Apa tuh??");
             System.Environment.Exit(1);
         }
+        return lowered;
     }
 
-    private int menus()
+    private string menus()
     {
         Console.WriteLine("=====DAFTAR BANGUN DATAR=====");
         Console.WriteLine("1. Persegi");
@@ -58,13 +70,13 @@ class BangunDatar
         Console.WriteLine("4. Trapesium");
         Console.WriteLine("5. Jajar Genjang");
 
-        string type = this.cli.ask("Jenis Bangun Datar Apa yang kamu inginkan? (1-5): ");
+        string type = this.cli.ask("Jenis Bangun Datar Apa yang kamu inginkan? (1-5): ", Convert.ToString(1));
 
         if (type.Trim() == "")
         {
             Console.WriteLine("Invalid mas.");
             this.menus();
-            return 0;
+            return "";
         }
 
         int typedInt = int.Parse(type);
@@ -73,29 +85,66 @@ class BangunDatar
         {
             Console.WriteLine("Invalid mas.");
             this.menus();
-            return 0;
+            return "";
         }
 
-        return typedInt;
+        Dictionary<int, string> luasDirectory = new Dictionary<int, string>() {
+            {1, BangunDatar.PERSEGI},
+            {2, BangunDatar.PERSEGI_PANJANG},
+            {3, BangunDatar.SEGITIGA},
+            {4, BangunDatar.JAJAR_GENJANG},
+            {5, BangunDatar.TRAPESIUM}
+        };
+
+        return luasDirectory[typedInt];
     }
 
-    public void luas()
+    private dynamic getFlatBuild(string? eksplisit)
     {
+        dynamic bangunDatar;
+        string getMenu = eksplisit != null ? eksplisit : this.menus();
+
+        Console.WriteLine(getMenu);
+
+        switch (getMenu)
+        {
+            case BangunDatar.PERSEGI:
+                Console.WriteLine("=====Persegi=====");
+                bangunDatar = new Persegi();
+                break;
+            case BangunDatar.PERSEGI_PANJANG:
+                Console.WriteLine("=====Persegi Panjang=====");
+                bangunDatar = new PersegiPanjang();
+                break;
+            case BangunDatar.JAJAR_GENJANG:
+                Console.WriteLine("=====Jajar Genjang=====");
+                bangunDatar = new JajarGenjang();
+                break;
+            case BangunDatar.SEGITIGA:
+                Console.WriteLine("=====Segitiga=====");
+                bangunDatar = new Segitiga();
+                break;
+            default:
+                Console.WriteLine("=====Trapesium=====");
+                bangunDatar = new Trapesium();
+                break;
+        }
+        return bangunDatar;
+    }
+
+    public void luas(string? eksplisit = null)
+    {
+        var bangunDatar = this.getFlatBuild(eksplisit);
         Console.WriteLine("=====LUAS=====");
-        int choice = this.menus();
-
-        Trapesium trapesium = new Trapesium();
-
-        trapesium.handler(BangunDatar.LUAS);
+        Console.WriteLine("Hasil Luas: {0}", bangunDatar.handler(BangunDatar.LUAS));
         return;
-
-        // Dictionary<int, string> luasDirectory = new Dictionary<int, string>() {
-        //     {0, }
-        // };
     }
 
-    public void keliling()
+    public void keliling(string? eksplisit = null)
     {
-        Console.WriteLine("Keliling!");
+        var bangunDatar = this.getFlatBuild(eksplisit);
+        Console.WriteLine("=====KELILING=====");
+        Console.WriteLine("Hasil Luas: {0}", bangunDatar.handler(BangunDatar.KELILING));
+        return;
     }
 }

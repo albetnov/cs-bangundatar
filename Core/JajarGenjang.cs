@@ -7,7 +7,7 @@ class JajarGenjang : BaseBangunDatar
     {
         this.cli.typeSatisfier(type);
 
-        this.alas = this.cli.toDouble().ask("Jumlah alas? ");
+        this.alas = this.cli.toDouble().ask("Jumlah alas? ", Convert.ToString(10));
         this.tinggi = this.cli.toDouble().ask("Jumlah tinggi? (default: sama dengan alas): ", Convert.ToString(this.alas));
 
         if (type == BangunDatar.LUAS)

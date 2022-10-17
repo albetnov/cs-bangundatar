@@ -6,7 +6,7 @@ class Persegi : BaseBangunDatar
     {
         this.cli.typeSatisfier(type);
 
-        this.sisi = this.cli.toDouble().ask("Berapa sisi dari persegi anda? ");
+        this.sisi = this.cli.toDouble().ask("Berapa sisi dari persegi anda? ", Convert.ToString(10));
 
         if (type == BangunDatar.LUAS)
         {

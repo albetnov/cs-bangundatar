@@ -33,8 +33,8 @@ class CommandLineParser
                 case "-l":
                     if (secondArg != null)
                     {
-                        this.bangunDatar.checkArgument(secondArg);
-                        this.bangunDatar.luas();
+                        string getParsed = this.bangunDatar.checkArgument(secondArg);
+                        this.bangunDatar.luas(getParsed);
                         return;
                     }
                     Console.WriteLine("Argument {luas} harus di isi.");
@@ -44,8 +44,8 @@ class CommandLineParser
                 case "-k":
                     if (secondArg != null)
                     {
-                        this.bangunDatar.checkArgument(secondArg);
-                        this.bangunDatar.keliling();
+                        string getParsed = this.bangunDatar.checkArgument(secondArg);
+                        this.bangunDatar.keliling(getParsed);
                         return;
                     }
                     Console.WriteLine("Argument {keliling} harus di isi.");

@@ -6,7 +6,7 @@ class PersegiPanjang : BaseBangunDatar
     {
         this.cli.typeSatisfier(type);
 
-        this.panjang = this.cli.toDouble().ask("Jumlah panjang? ");
+        this.panjang = this.cli.toDouble().ask("Jumlah panjang? ", Convert.ToString(10));
         this.lebar = this.cli.toDouble().ask("Jumlah lebar? (default: sama dengan panjang): ", Convert.ToString(this.panjang));
 
         if (type == BangunDatar.LUAS)

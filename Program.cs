@@ -1,6 +1,4 @@
-﻿using System;
-using Parser.CommandLineParser;
-
+﻿using Parser;
 namespace Program
 {
     class BangunDatar

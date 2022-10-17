@@ -144,7 +144,7 @@ class BangunDatar
     {
         var bangunDatar = this.getFlatBuild(eksplisit);
         Console.WriteLine("=====KELILING=====");
-        Console.WriteLine("Hasil Luas: {0}", bangunDatar.handler(BangunDatar.KELILING));
+        Console.WriteLine("Hasil Keliling: {0}", bangunDatar.handler(BangunDatar.KELILING));
         return;
     }
 }

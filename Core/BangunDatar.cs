@@ -14,7 +14,7 @@ class BangunDatar
 
     public BangunDatar()
     {
-        this.cli = new CliHelper();
+        this.cli = new CliHelper().disableToDouble();
     }
     public void question()
     {
@@ -60,12 +60,20 @@ class BangunDatar
 
         string type = this.cli.ask("Jenis Bangun Datar Apa yang kamu inginkan? (1-5): ");
 
+        if (type.Trim() == "")
+        {
+            Console.WriteLine("Invalid mas.");
+            this.menus();
+            return 0;
+        }
+
         int typedInt = int.Parse(type);
 
         if (typedInt < 0 || typedInt > 5)
         {
             Console.WriteLine("Invalid mas.");
             this.menus();
+            return 0;
         }
 
         return typedInt;
@@ -75,6 +83,11 @@ class BangunDatar
     {
         Console.WriteLine("=====LUAS=====");
         int choice = this.menus();
+
+        Trapesium trapesium = new Trapesium();
+
+        trapesium.handler(BangunDatar.LUAS);
+        return;
 
         // Dictionary<int, string> luasDirectory = new Dictionary<int, string>() {
         //     {0, }

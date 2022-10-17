@@ -9,16 +9,27 @@ class CliHelper
         return this;
     }
 
+    public CliHelper disableToDouble()
+    {
+        this.setAsDouble = false;
+        return this;
+    }
+
     public dynamic ask(string question, string userDefault = "")
     {
         Console.Write(question);
         string? answer = Console.ReadLine();
 
-        string finalAnswer = answer ?? userDefault;
+        string finalAnswer = answer == "" || answer == null ? userDefault : answer;
+
+        if (finalAnswer == userDefault)
+        {
+            Console.WriteLine("Menggunakan nilai default {0}", userDefault);
+        }
+
 
         if (this.setAsDouble)
         {
-            Console.WriteLine("Menggunakan nilai default: {0}", finalAnswer);
             return Convert.ToDouble(finalAnswer);
         }
 
@@ -27,9 +38,9 @@ class CliHelper
 
     public bool typeSatisfier(string type)
     {
-        if (type != BangunDatar.LUAS || type != BangunDatar.KELILING)
+        if (type != BangunDatar.LUAS && type != BangunDatar.KELILING)
         {
-            Console.WriteLine("Invalid type");
+            Console.WriteLine("Tipe mu invalid mas.");
             System.Environment.Exit(1);
             return false;
         }

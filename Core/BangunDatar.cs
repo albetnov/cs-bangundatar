@@ -67,16 +67,15 @@ class BangunDatar
         Console.WriteLine("1. Persegi");
         Console.WriteLine("2. Persegi Panjang");
         Console.WriteLine("3. Segitiga");
-        Console.WriteLine("4. Trapesium");
-        Console.WriteLine("5. Jajar Genjang");
+        Console.WriteLine("4. Jajar Genjang");
+        Console.WriteLine("5. Trapesium");
 
         string type = this.cli.ask("Jenis Bangun Datar Apa yang kamu inginkan? (1-5): ", Convert.ToString(1));
 
         if (type.Trim() == "")
         {
             Console.WriteLine("Invalid mas.");
-            this.menus();
-            return "";
+            return this.menus();
         }
 
         int typedInt = int.Parse(type);
@@ -84,8 +83,7 @@ class BangunDatar
         if (typedInt < 0 || typedInt > 5)
         {
             Console.WriteLine("Invalid mas.");
-            this.menus();
-            return "";
+            return this.menus();
         }
 
         Dictionary<int, string> luasDirectory = new Dictionary<int, string>() {
